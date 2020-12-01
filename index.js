@@ -89,8 +89,8 @@ conn.on('message-new', async(m) =>
 
 // Fitur
 
-if (text.includes('!nulis')){
-  var teks = text.replace(/!nulis /, '')
+if (text.includes('$nulis')){
+  var teks = text.replace(/$nulis /, '')
     axios.get('https://bangandre.herokuapp.com/nulis?teks='+teks)
     .then((res) => {
       imageToBase64(res.data.result)
@@ -156,9 +156,8 @@ axios.get(`https://st4rz.herokuapp.com/api/wiki?q=${teks}`).then((res) => {
 
 if (text.includes("$sholat")){
   const teks = text.replace(/$sholat /, "")
-  axios.get(`https://api.haipbis.xyz/jadwalsholat?daerah=${teks}`).then ((res) =>{
-  conn.sendMessage(id, '[ WAIT ] Sedang di proses⏳ silahkan tunggu sebentar', MessageType.text)
-  let hasil = `Jadwal sholat di ${teks} hari ini adalah\n\n⚡Imsyak : ${res.data.Imsyak} WIB\n⚡Subuh : ${res.data.Subuh} WIB\n⚡Dzuhur : ${res.data.Dzuhur} WIB\n⚡Ashar : ${res.data.Ashar} WIB\n⚡Maghrib : ${res.data.Maghrib} WIB\n⚡Isya : ${res.data.Isya} WIB\n⚡Tengah malam : ${res.data.Dhuha} WIB\n`;
+  axios.get(`https://mhankbarbar.herokuapp.com/api/jadwalshalat?daerah=${teks}&apiKey=Apikey`).then ((res) =>{
+  let hasil = `Jadwal sholat di ${teks} hari ini adalah\n\nðŸ‘‰⚡Imsyak : ${res.data.Imsyak}\nðŸ‘‰⚡Subuh : ${res.data.Subuh} WIB\nðŸ‘‰⚡Dzuhur : ${res.data.Dzuhur}WIB\nðŸ‘‰⚡Ashar : ${res.data.Ashar} WIB\nðŸ‘‰⚡Maghrib : ${res.data.Maghrib}\nðŸ‘‰⚡Isya : ${res.data.Isya} WIB\nðŸ‘‰⚡Tengah malam : ${res.data.Dhuha} WIB`;
   conn.sendMessage(id, hasil, MessageType.text);
 })
 }
